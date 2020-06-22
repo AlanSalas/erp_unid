@@ -114,9 +114,13 @@ class EmployeesDataAccess
 
             $insertion = $this->insertion($newArray, $paramsEconomic, 'sp_insert_economic');
 
-            $paramsScholarship = array('employeeId', 'elementarySchoolName', 'elementarySchoolAddress', 'elementarySchoolFrom', 'elementarySchoolTo', 'elementarySchoolDegree', 'juniorHighName', 'juniorHighAddress', 'juniorHighFrom', 'juniorHighTo', 'juniorHighDegree', 'highSchoolName', 'highSchoolAddress', 'highSchoolFrom', 'highSchoolTo', 'highSchoolDegree', 'professionalSchoolName', 'professionalSchoolTo', 'professionalSchoolFrom', 'professionalSchoolAddress', 'professionalSchoolDegree');
+            $paramsGeneral = array('employeeId', 'isBonded', 'isBondedAgency', 'isUnionized', 'isUnionizedUnion', 'startingDate', 'isInsured', 'isInsuredAgency', 'canTravel', 'canTravelReason', 'canMove', 'canMoveReason');
 
-            $insertion = $this->insertion($newArray, $paramsScholarship, 'sp_insert_scholarship');
+            $this->insertion($newArray, $paramsGeneral, 'sp_insert_general');
+
+            $paramsEconomic = array('employeeId', 'workingSpouse', 'workingSpouseSalary', 'ownedHouse', 'ownedHouseValue', 'payRent', 'payRentValue', 'ownCar', 'ownCarModel', 'hasDebts', 'hasDebtsValue', 'monthlyExpenses');
+
+            $insertion = $this->insertion($newArray, $paramsEconomic, 'sp_insert_economic');
 
             return $insertion->rowCount();
 
