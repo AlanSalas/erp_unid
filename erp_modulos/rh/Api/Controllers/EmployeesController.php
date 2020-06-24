@@ -15,9 +15,10 @@ class EmployeesController
 
             case 'GET':
                 if($id){
-
+                    $response = $services->getEmployee($id);
+                } else {
+                    $response = $services->getAllEmployees();
                 }
-                $response = $services->getAllEmployees();
                 break;
 
             case 'POST':

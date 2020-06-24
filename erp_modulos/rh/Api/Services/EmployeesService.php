@@ -26,10 +26,20 @@ class EmployeesService
             return $response;
         }
     }
+
     public function getAllEmployees()
     {
         $dataAccess = new EmployeesDataAccess();
         $result = $dataAccess->selectAll();
+        $response['status_code_header'] = 'HTTP/1.1 200 OK';
+        $response['body'] = json_encode($result);
+        return $response;
+    }
+
+    public function getEmployee($id)
+    {
+        $dataAccess = new EmployeesDataAccess();
+        $result = $dataAccess->select($id);
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
         $response['body'] = json_encode($result);
         return $response;

@@ -16,12 +16,15 @@ class EmployeesDataAccess
         $this->dbConnection = (new DatabaseConnector())->connection();
     }
 
-    public function selectAll()
+    public function select($id)
     {
-        $stmt = $this->dbConnection->query
+        $stmt = $this->dbConnection->prepare
         ('
         SELECT emp.id AS id
+            ,department
+            ,dept.name AS departmentName
             ,position
+            ,pue.positionName AS positionName 
             ,desiredSalary
             ,approvedSalary
             ,est.name AS STATUS
@@ -45,6 +48,59 @@ class EmployeesDataAccess
             ,viv.name AS livesWith
             ,dep.name AS dependOn
         FROM empleados_rh emp
+        JOIN departamentos_rh dept ON emp.department = dept.id
+        JOIN puestos_empleados_rh pue ON emp.position = pue.id
+        JOIN estatus_empleados_rh est ON emp.STATUS = est.id
+        JOIN nacionalidad_empleados_rh nac ON emp.nationality = nac.id
+        JOIN estado_civil_empleados_rh esc ON emp.maritalStatus = esc.id
+        JOIN genero_empleados_rh gen ON emp.gender = gen.id
+        JOIN vive_con_empleados_rh viv ON emp.maritalStatus = viv.id
+        JOIN depende_de_empleados_rh dep ON emp.dependOn = dep.id
+        WHERE recordStatus = 1
+        AND emp.id = ?
+        ');
+        try {
+            $stmt->execute(array($id));
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            exit($e->getMessage());
+        }
+    }
+
+    public function selectAll()
+    {
+        $stmt = $this->dbConnection->query
+        ('
+        SELECT emp.id AS id
+            ,department
+            ,dept.name AS departmentName
+            ,position
+            ,pue.positionName AS positionName 
+            ,desiredSalary
+            ,approvedSalary
+            ,est.name AS STATUS
+            ,recruitmentDate
+            ,recordStatus
+            ,lastname
+            ,mothersLastname
+            ,emp.name AS name
+            ,birthDate
+            ,telephone
+            ,nac.name AS nationality
+            ,postalCode
+            ,address
+            ,suburb
+            ,birthPlace
+            ,height
+            ,weight
+            ,esc.name AS maritalStatus
+            ,otherGender
+            ,gen.name AS gender
+            ,viv.name AS livesWith
+            ,dep.name AS dependOn
+        FROM empleados_rh emp
+        JOIN departamentos_rh dept ON emp.department = dept.id
+        JOIN puestos_empleados_rh pue ON emp.position = pue.id
         JOIN estatus_empleados_rh est ON emp.STATUS = est.id
         JOIN nacionalidad_empleados_rh nac ON emp.nationality = nac.id
         JOIN estado_civil_empleados_rh esc ON emp.maritalStatus = esc.id
@@ -76,15 +132,17 @@ class EmployeesDataAccess
 
             $newArray = array_map(function ($array){
                 if(is_numeric($array)){
-                    return floatval($array);
+                    return trim(floatval($array));
                 }
                 if(empty($array)){
                     return NULL;
                 }
-                return $array;
+                return trim($array);
             }, $array);
 
-            $params = array('position', 'desiredSalary', 'approvedSalary', 'status', 'recruitmentDate', 'recordStatus', 'lastname', 'mothersLastname', 'name', 'birthDate', 'telephone', 'nationality', 'postalCode', 'address', 'suburb', 'birthPlace', 'height', 'weight', 'maritalStatus', 'otherGender', 'gender','livesWith', 'dependOn');
+            $newArray['number'] = $this->getEmployeeNumber($array);
+
+            $params = array('department', 'position', 'desiredSalary', 'approvedSalary', 'status', 'recruitmentDate', 'recordStatus', 'lastname', 'mothersLastname', 'name', 'birthDate', 'telephone', 'nationality', 'postalCode', 'address', 'suburb', 'birthPlace', 'height', 'weight', 'maritalStatus', 'otherGender', 'gender','livesWith', 'dependOn', 'number');
 
             $response = $this->insertion($newArray, $params, 'sp_insert_employee');
 
@@ -154,11 +212,16 @@ class EmployeesDataAccess
 
         $stmt->execute($queryValues);
 
-        print_r('execute '.$procedureName);
+        //print_r('execute '.$procedureName);
 
         $stmt->debugDumpParams();
 
         return $stmt;
+    }
+
+    public function getEmployeeNumber($array)
+    {
+        return 'E'.$array['department'].$array['position'].time();
     }
 
 }

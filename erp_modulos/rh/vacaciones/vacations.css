@@ -1,3 +1,12 @@
 .modal {
-    top: 30%;
+    top: 20%;
+}
+
+.section {
+    border-radius: 0 !important;
+    font-size: 17px;
+}
+
+.nav i {
+    padding: 2px
 }

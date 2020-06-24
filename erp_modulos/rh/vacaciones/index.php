@@ -26,6 +26,12 @@
 </head>
 
 <body>
+<?php if (isset($_SESSION['id_empleado'])) { ?>
+    <input type="hidden" id="employeeId" name="employeeId" value="<?=$_SESSION['id_empleado']?>"/>
+    <input type="hidden" id="moduleId" name="moduleId" value="<?=$_SESSION['module']?>"/>
+    <input type="hidden" id="employeeEdit" name="employeeEdit" value="<?=json_encode($_SESSION['editar'], JSON_NUMERIC_CHECK)?>"/>
+    <input type="hidden" id="employeeDelete" name="employeeDelete" value="<?=json_encode($_SESSION['eliminar'], JSON_NUMERIC_CHECK)?>"/>
+<?php } ?>
 <!-- Full Container -->
 <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
     <?php include(ROOT_PATH . "/includes/navbar.php"); ?>
@@ -48,31 +54,46 @@
                                 Consultar Solicitudes de Vacaciones
                             </div>
                         </div>
+                        <?php if (in_array($_SESSION['module'], $_SESSION['insertar'])) { ?>
                         <div class="page-title-actions">
                             <a class="btn btn-outline-success" href="form.php" data-toggle="modal" data-target="#modal-submit" role="button">
                                 Nueva Solicitud
                             </a>
                         </div>
+                        <?php } ?>
                     </div>
                 </div>
-                <div class="container main-container col-12">
-                    <div class="main-card mb-3 card">
-                        <div class="card-body">
-                            <div class="container">
+                <div class="container main-container col-12" id="main-container">
+                    <div class="btn-group btn-group-toggle nav" data-toggle="buttons">
+                        <label class="btn section btn-secondary">
+                            <input type="radio" name="vacationRequested" id="vacationRequested" checked><i class="fas fa-plus-circle"></i> Por validar
+                        </label>
+                        <label class="btn section btn-secondary active">
+                            <input type="radio" name="vacationPending" id="vacationPending"><i class="fas fa-clock"></i>  Requieren validación
+                        </label>
+                        <label class="btn section btn-secondary">
+                            <input type="radio" name="vacationValidated" id="vacationValidated"><i class="fas fa-check-circle"></i> Validadas
+                        </label>
+                    </div>
+                    <div class="collapse show" id="vacations" data-parent="#main-container">
+                        <div class="main-card mb-3 card">
+                            <div class="card-body" >
+                                <div class="container">
+                                </div>
+                                <table class="mb-0 table table-bordered text-center" id="table-vac" >
+                                    <thead>
+                                    <tr>
+                                        <th scope="col" data-sortable="true">#</th>
+                                        <th scope="col" data-sortable="true">Empleado</th>
+                                        <th scope="col" data-sortable="true">De </th>
+                                        <th scope="col" data-sortable="true">A </th>
+                                        <th scope="col" data-sortable="true">Departamento</th>
+                                        <th scope="col" data-sortable="true">Supervisor</th>
+                                        <th scope="col" >Acciones</th>
+                                    </tr>
+                                    </thead>
+                                </table>
                             </div>
-                            <table class="mb-0 table table-bordered text-center" id="table-emp" >
-                                <thead>
-                                <tr>
-                                    <th scope="col" data-sortable="true">#</th>
-                                    <th scope="col" data-sortable="true">Estado</th>
-                                    <th scope="col" data-sortable="true">Puesto</th>
-                                    <th scope="col" data-sortable="true">Apellido paterno</th>
-                                    <th scope="col" data-sortable="true">Apellido materno</th>
-                                    <th scope="col" data-sortable="true">Nombre</th>
-                                    <th scope="col" data-sortable="true">Acciones</th>
-                                </tr>
-                                </thead>
-                            </table>
                         </div>
                     </div>
                 </div>
@@ -106,6 +127,60 @@
         </div>
         <!-- /Container app main -->
     </div>
+    <div class="modal fade" id="modal-submit"  role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="submit-label">Crear solicitud de vacaciones</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="form-pos">
+                        <div class="form-group">
+                            <label for="employeeId">Empleado:</label>
+                            <div class="input-group input-group-sm mb-3">
+                                <input class="form-control" type="text" id="employeeId" name="employeeId" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="vacationSupervisor">Supervisor:</label>
+                            <div class="input-group input-group-sm mb-3">
+                                <select class="form-control" data-live-search="true" id="vacationSupervisor" name="vacationSupervisor">
+                                    <option>Selecionar</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label for="vacationFrom">Desde la fecha:</label>
+                                    <div class="input-group input-group-sm mb-3">
+                                        <input class="form-control" type="date" id="vacationFrom" name="vacationFrom">
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label for="vacationTo">Hasta la fecha:</label>
+                                    <div class="input-group input-group-sm mb-3">
+                                        <input class="form-control" type="date" id="vacationTo" name="vacationTo">
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="submit" class="btn btn-success">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="modal fade" id="modal-delete" role="dialog">
         <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">

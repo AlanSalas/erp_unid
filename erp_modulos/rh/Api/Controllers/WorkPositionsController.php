@@ -16,7 +16,7 @@ class WorkPositionsController
             case 'GET':
                 if ($id) {
                     $response = $services->getPosition($id);
-                }elseif ($params && $params['department']){
+                }elseif ($params && isset($params['department'])){
                     $response = $services->getPositionByDepartment($params['department']);
                 }else{
                     $response = $services->getAllPositions();

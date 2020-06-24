@@ -30,7 +30,6 @@ $employees = new EmployeesController();
 $definedOptions= new DefinedOptionsController();
 $workPositions = new WorkPositionsController();
 
-
 if ($route) {
 
     switch ($route) {
