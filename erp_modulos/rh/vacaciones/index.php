@@ -10,14 +10,17 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
     <link rel="stylesheet" href="/main.css" />
     <link rel="stylesheet" href="vacations.css" />
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script type="text/javascript" src=" ../common/factory.js"></script>
     <script type="text/javascript" src="vacations.js"></script>
@@ -27,8 +30,9 @@
 
 <body>
 <?php if (isset($_SESSION['id_empleado'])) { ?>
-    <input type="hidden" id="employeeId" name="employeeId" value="<?=$_SESSION['id_empleado']?>"/>
-    <input type="hidden" id="moduleId" name="moduleId" value="<?=$_SESSION['module']?>"/>
+    <input type="hidden" id="employee" name="employee" value="<?=$_SESSION['id_empleado']?>"/>
+    <input type="hidden" id="user" name="user" value="<?=$_SESSION['id']?>"/>
+    <input type="hidden" id="module" name="module" value="<?=$_SESSION['module']?>"/>
     <input type="hidden" id="employeeEdit" name="employeeEdit" value="<?=json_encode($_SESSION['editar'], JSON_NUMERIC_CHECK)?>"/>
     <input type="hidden" id="employeeDelete" name="employeeDelete" value="<?=json_encode($_SESSION['eliminar'], JSON_NUMERIC_CHECK)?>"/>
 <?php } ?>
@@ -56,7 +60,7 @@
                         </div>
                         <?php if (in_array($_SESSION['module'], $_SESSION['insertar'])) { ?>
                         <div class="page-title-actions">
-                            <a class="btn btn-outline-success" href="form.php" data-toggle="modal" data-target="#modal-submit" role="button">
+                            <a class="btn btn-outline-success" href="#" data-toggle="modal" data-target="#modal-submit" role="button">
                                 Nueva Solicitud
                             </a>
                         </div>
@@ -88,7 +92,6 @@
                                         <th scope="col" data-sortable="true">De </th>
                                         <th scope="col" data-sortable="true">A </th>
                                         <th scope="col" data-sortable="true">Departamento</th>
-                                        <th scope="col" data-sortable="true">Supervisor</th>
                                         <th scope="col" >Acciones</th>
                                     </tr>
                                     </thead>
@@ -137,38 +140,29 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="form-pos">
+                    <form id="form-vac">
                         <div class="form-group">
                             <label for="employeeId">Empleado:</label>
                             <div class="input-group input-group-sm mb-3">
                                 <input class="form-control" type="text" id="employeeId" name="employeeId" disabled>
                             </div>
                         </div>
+                        <div class="form-row">
+                            <label for="availableDays">Días dispobible: <span id="availableDays"></span></label>
+                        </div>
                         <div class="form-group">
                             <label for="vacationSupervisor">Supervisor:</label>
-                            <div class="input-group input-group-sm mb-3">
-                                <select class="form-control" data-live-search="true" id="vacationSupervisor" name="vacationSupervisor">
+                            <div class="input-group">
+                                <select class="form-control selectpicker" data-live-search="true" id="vacationSupervisor" name="vacationSupervisor">
                                     <option>Selecionar</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="form-row">
-                            <div class="col-md-6 mb-3">
-                                <div class="form-group">
-                                    <label for="vacationFrom">Desde la fecha:</label>
-                                    <div class="input-group input-group-sm mb-3">
-                                        <input class="form-control" type="date" id="vacationFrom" name="vacationFrom">
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <div class="form-group">
-                                    <label for="vacationTo">Hasta la fecha:</label>
-                                    <div class="input-group input-group-sm mb-3">
-                                        <input class="form-control" type="date" id="vacationTo" name="vacationTo">
-                                        </select>
-                                    </div>
+                        <div class="form-group">
+                            <div class="input-group input-daterange" >
+                                <label for="vacationDates">Fechas:</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="vacationDate">
                                 </div>
                             </div>
                         </div>

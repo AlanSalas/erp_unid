@@ -47,6 +47,7 @@ class EmployeesDataAccess
             ,gen.name AS gender
             ,viv.name AS livesWith
             ,dep.name AS dependOn
+            ,number
         FROM empleados_rh emp
         JOIN departamentos_rh dept ON emp.department = dept.id
         JOIN puestos_empleados_rh pue ON emp.position = pue.id
@@ -98,6 +99,7 @@ class EmployeesDataAccess
             ,gen.name AS gender
             ,viv.name AS livesWith
             ,dep.name AS dependOn
+            ,number
         FROM empleados_rh emp
         JOIN departamentos_rh dept ON emp.department = dept.id
         JOIN puestos_empleados_rh pue ON emp.position = pue.id
@@ -110,6 +112,60 @@ class EmployeesDataAccess
         WHERE recordStatus = 1
         ');
         try {
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            exit($e->getMessage());
+        }
+    }
+
+
+    public function selectAllSupervisorsByDepartment($department)
+    {
+        $stmt = $this->dbConnection->prepare
+        ('
+        SELECT emp.id AS id
+            ,department
+            ,dept.name AS departmentName
+            ,position
+            ,pue.positionName AS positionName 
+            ,desiredSalary
+            ,approvedSalary
+            ,est.name AS STATUS
+            ,recruitmentDate
+            ,recordStatus
+            ,lastname
+            ,mothersLastname
+            ,emp.name AS name
+            ,birthDate
+            ,telephone
+            ,nac.name AS nationality
+            ,postalCode
+            ,address
+            ,suburb
+            ,birthPlace
+            ,height
+            ,weight
+            ,esc.name AS maritalStatus
+            ,otherGender
+            ,gen.name AS gender
+            ,viv.name AS livesWith
+            ,dep.name AS dependOn
+            ,number
+        FROM empleados_rh emp
+        JOIN departamentos_rh dept ON emp.department = dept.id
+        JOIN puestos_empleados_rh pue ON emp.position = pue.id
+        JOIN estatus_empleados_rh est ON emp.STATUS = est.id
+        JOIN nacionalidad_empleados_rh nac ON emp.nationality = nac.id
+        JOIN estado_civil_empleados_rh esc ON emp.maritalStatus = esc.id
+        JOIN genero_empleados_rh gen ON emp.gender = gen.id
+        JOIN vive_con_empleados_rh viv ON emp.maritalStatus = viv.id
+        JOIN depende_de_empleados_rh dep ON emp.dependOn = dep.id
+        WHERE recordStatus = 1
+        AND pue.positionIsSupervisor = 1
+        AND dept.id = ?
+        ');
+        try {
+            $stmt->execute(array($department));
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             exit($e->getMessage());

@@ -210,7 +210,7 @@ if (isset($id_usr)) {
                             <div class="form-row">
                                 <div class="col-md-6 mb-3">
                                     <label for="departamento">Departamento</label>
-                                    <select class="form-control selectpicker"  style="{background-color: #fff}" data-live-search="true" id="department" name="department">
+                                    <select class="form-control selectpicker" data-live-search="true" id="department" name="department">
                                         <option value="0">Seleccionar</option>
                                     </select>
                                 </div>
