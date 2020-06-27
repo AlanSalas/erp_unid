@@ -21,10 +21,9 @@ $(document).ready(function () {
         $("#label_status").css('display','none');
         $("#id_empleado22").css('display','none');
         $("#id_empleadoo").css('display','block');
-        $("#formCoursesEmployee").reset();
-        // $("#id_empleado").reset();
-        // $("#id_empleado2").val("");
-        // $("#id_curso").val("0");
+        // $("#formCoursesEmployee").reset();
+        $("#id_curso").val("0").trigger("chosen:updated")
+        $("#id_empleado").val("").trigger("chosen:updated")
     });
 
     $(".btnEdit").click(function () {
