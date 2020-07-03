@@ -26,6 +26,16 @@ class VacationsService
         return $response;
     }
 
+    public function getVacationByEmployee($employee)
+    {
+        $dataAccess = new VacationsDataAccess();
+        $result = $dataAccess->selectByEmployee($employee);
+        $response['status_code_header'] = 'HTTP/1.1 200 OK';
+        $response['body'] = json_encode($result);
+        return $response;
+    }
+
+
     public function getVacationBySupervisor($supervisor)
     {
         $dataAccess = new VacationsDataAccess();

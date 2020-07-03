@@ -3,8 +3,8 @@
 require_once __DIR__ . '/../../../config/config.php';
 require_once __DIR__ . '/../../../libs/database.php';
 
-session_cache_limiter('private');
-session_cache_expire(0);
+//session_cache_limiter('private');
+//session_cache_expire(0);
 session_start(['read_and_close' => true]);
 error_reporting(0);
 

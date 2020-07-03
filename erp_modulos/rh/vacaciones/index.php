@@ -1,4 +1,4 @@
-<?php include __DIR__ . "/../common/session.php"; ?>
+<?php include __DIR__ . "/../common/session.php";?>
 <!DOCTYPE html>
 <html lang="mx">
 
@@ -21,6 +21,7 @@
     <script src="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script type="text/javascript" src=" ../common/factory.js"></script>
     <script type="text/javascript" src="vacations.js"></script>
@@ -60,7 +61,8 @@
                         </div>
                         <?php if (in_array($_SESSION['module'], $_SESSION['insertar'])) { ?>
                         <div class="page-title-actions">
-                            <a class="btn btn-outline-success" href="#" data-toggle="modal" data-target="#modal-submit" role="button">
+                            <a class="btn btn-outline-success" href="#" data-toggle="modal" data-target="#modal-submit"data-target="#modal-submit"
+                               role="button" id="new">
                                 Nueva Solicitud
                             </a>
                         </div>
@@ -69,14 +71,14 @@
                 </div>
                 <div class="container main-container col-12" id="main-container">
                     <div class="btn-group btn-group-toggle nav" data-toggle="buttons">
-                        <label class="btn section btn-secondary">
-                            <input type="radio" name="vacationRequested" id="vacationRequested" checked><i class="fas fa-plus-circle"></i> Por validar
+                        <label class="btn section btn-secondary" id="vacationRequested">
+                            <input type="radio" name="vacationDisplay" id="vacationRequested" value="vacationRequested" checked><i class="fas fa-plus-circle"></i> Por validar
                         </label>
-                        <label class="btn section btn-secondary active">
-                            <input type="radio" name="vacationPending" id="vacationPending"><i class="fas fa-clock"></i>  Requieren validación
+                        <label class="btn section btn-secondary active" id="vacationPending">
+                            <input type="radio" name="vacationDisplay" id="vacationPending" value="vacationPending"><i class="fas fa-clock"></i>  Requieren validación
                         </label>
-                        <label class="btn section btn-secondary">
-                            <input type="radio" name="vacationValidated" id="vacationValidated"><i class="fas fa-check-circle"></i> Validadas
+                        <label class="btn section btn-secondary" id="vacationValidated">
+                            <input type="radio" name="vacationDisplay" id="vacationValidated" value="vacationValidated"><i class="fas fa-check-circle"></i> Validadas
                         </label>
                     </div>
                     <div class="collapse show" id="vacations" data-parent="#main-container">
@@ -84,9 +86,9 @@
                             <div class="card-body" >
                                 <div class="container">
                                 </div>
-                                <table class="mb-0 table table-bordered text-center" id="table-vac" >
+                                <table class="mb-0 table table-bordered text-center" id="table-vac">
                                     <thead>
-                                    <tr>
+                                    <tr class="d-flex">
                                         <th scope="col" data-sortable="true">#</th>
                                         <th scope="col" data-sortable="true">Empleado</th>
                                         <th scope="col" data-sortable="true">De </th>
@@ -95,6 +97,8 @@
                                         <th scope="col" >Acciones</th>
                                     </tr>
                                     </thead>
+                                    <tbody id="table-vac-body">
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
@@ -162,14 +166,14 @@
                             <div class="input-group input-daterange" >
                                 <label for="vacationDates">Fechas:</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" id="vacationDate">
+                                    <input type="text" class="form-control" id="vacationDate" autocomplete="off">
                                 </div>
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" id="submit" class="btn btn-success">Guardar</button>
+                    <button type="button" id="submit" class="btn btn-success" data-method="submit">Guardar</button>
                 </div>
             </div>
         </div>

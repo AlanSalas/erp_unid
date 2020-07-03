@@ -18,8 +18,10 @@ class VacationsController
                     $response = $services->getVacation($id);
                 }elseif ($params && isset($params['user'])){
                     $response = $services->getVacationByUser($params['user']);
-                } elseif ($params && isset($params['supervisor'])){
+                }elseif ($params && isset($params['supervisor'])){
                     $response = $services->getVacationBySupervisor($params['supervisor']);
+                }elseif ($params && isset($params['employee'])){
+                    $response = $services->getVacationByEmployee($params['employee']);
                 }else{
                     $response = $services->getAllVacations();
 
