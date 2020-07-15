@@ -2,41 +2,10 @@ $(document).ready(function () {
   var obj = {};
 
   //BOOTSTRAP TABLES
-  // $("#submodulos").bootstrapTable({
-  //     pagination: true,
-  //     search: true,
-  // })
-
-  // $("#id_moduloP").change(function () {
-  //     obj.action = "getCursosByGrupo"
-  //     obj.id_grupo = $("#id_grupo").val()
-  //     $.post(
-  //         "functions.php",
-  //         obj,
-  //         function (res) {
-  //             let stringHTML = ``
-  //             if (res.length > 0) {
-  //                 $("#id_curso_many").attr("data-placeholder", "Selecciona curso(s)")
-  //                 stringHTML = res
-  //                     .map(item => {
-  //                         return `
-  //                         <option value="${item.id_curso}">${item.nombre_curso}</option>
-  //                     `
-  //                     })
-  //                     .join("")
-  //             } else {
-  //                 stringHTML = ``
-  //                 $("#id_curso_many").attr("data-placeholder", "El grupo seleccionado no cuenta con ningún curso")
-  //                 $("#id_curso_one").attr("data-placeholder", "El grupo seleccionado no cuenta con ningún curso")
-  //             }
-  //             $("#id_curso_many").html(stringHTML)
-  //             $("#id_curso_one").html(stringHTML)
-  //             $("#id_curso_many").trigger("chosen:updated")
-  //             $("#id_curso_one").trigger("chosen:updated")
-  //         },
-  //         "JSON"
-  //     )
-  // })
+  $("#tablesubmodulos").bootstrapTable({
+      pagination: true,
+      search: true,
+  })
 
   //Equiz
   $(".chosen-select").chosen({

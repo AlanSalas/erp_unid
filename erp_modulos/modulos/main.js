@@ -10,10 +10,10 @@ $(document).ready(function () {
         }
     })
 
-    // $("#modulos").bootstrapTable({
-    //     pagination: true,
-    //     search: true,
-    // })
+    $("#tablemodulos").bootstrapTable({
+        pagination: true,
+        search: true,
+    })
 
     //Accion de boton para insertar en la vista
     $("#btn-new").click(function () {

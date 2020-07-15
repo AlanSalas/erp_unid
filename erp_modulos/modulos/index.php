@@ -90,7 +90,7 @@ if (isset($id_usr)) {
                                         <div class="col-lg-12">
                                             <div class="main-card mb-3 card">
                                                 <div class="card-body">
-                                                    <table class="mb-0 table table-bordered text-center" id="modulos">
+                                                    <table class="mb-0 table table-bordered text-center" id="tablemodulos">
                                                         <thead>
                                                             <tr>
                                                                 <th>#</th>
@@ -162,7 +162,7 @@ if (isset($id_usr)) {
                                         <div class="col-lg-12">
                                             <div class="main-card mb-3 card">
                                                 <div class="card-body">
-                                                    <table class="mb-0 table table-bordered text-center" id="modulosPrincipales">
+                                                    <table class="mb-0 table table-bordered text-center" id="tablemodulosPrincipales">
                                                         <thead>
                                                             <tr>
                                                                 <th>#</th>
@@ -233,7 +233,7 @@ if (isset($id_usr)) {
                                         <div class="col-lg-12">
                                             <div class="main-card mb-3 card">
                                                 <div class="card-body">
-                                                    <table class="mb-0 table table-bordered text-center" id="submodulos">
+                                                    <table class="mb-0 table table-bordered text-center" id="tablesubmodulos">
                                                         <thead>
                                                             <tr>
                                                                 <th>#</th>
@@ -346,7 +346,7 @@ if (isset($id_usr)) {
                                 </div>
                             </div>
                             <div class="form-row">
-                                <div class="col-md-12 mb-3">
+                                <div class="col-md-10 mb-3">
                                     <label for="icono_modulo">Icono</label>
                                     <select name="icono_modulo" id="icono_modulo" class="form-control">
                                         <option value="0">
@@ -375,6 +375,27 @@ if (isset($id_usr)) {
                                         </option>
                                         <option value="pe-7s-user">
                                             Perfil
+                                        </option>
+                                        <option value="pe-7s-id">
+                                            ID Card
+                                        </option>
+                                        <option value="pe-7s-study">
+                                            Birrete
+                                        </option>
+                                        <option value="pe-7s-share">
+                                            Conexiones
+                                        </option>
+                                        <option value="pe-7s-ribbon">
+                                            Ribbon
+                                        </option>
+                                        <option value="pe-7s-like2">
+                                            Like
+                                        </option>
+                                        <option value="pe-7s-config">
+                                            Config
+                                        </option>
+                                        <option value="pe-7s-comment">
+                                            Comment
                                         </option>
                                     </select>
                                 </div>

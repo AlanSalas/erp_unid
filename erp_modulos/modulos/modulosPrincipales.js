@@ -10,10 +10,10 @@ $(document).ready(function () {
     }
   });
 
-  //   $("#modulosPrincipales").bootstrapTable({
-  //       pagination: true,
-  //       search: true,
-  //   })
+    $("#tablemodulosPrincipales").bootstrapTable({
+        pagination: true,
+        search: true,
+    })
 
   //Accion de boton para insertar en la vista
   $("#btn-newMP").click(function () {
