@@ -1,6 +1,7 @@
 $(document).ready(function () {
     var obj = {}
 
+
     $("#id_empleado").prop("disabled", "disabled")
 
     $("#department").change(function () {
@@ -41,7 +42,7 @@ $(document).ready(function () {
         pagination: true,
         search: true,
     })
-
+  
     $("#newUser").click(function () {
         $("#btnInsertUser").addClass("insert")
         $("#id_empleado").attr("data-placeholder", "Seleccione un empleado")
@@ -97,6 +98,7 @@ $(document).ready(function () {
                     },
                     "JSON"
                 )
+
                 $("#nombre_usr").val(res.nombre_usr)
                 $("#correo_usr").val(res.correo_usr)
                 $("#password_usr").val(res.password_usr)
@@ -173,7 +175,6 @@ $(document).ready(function () {
             })
 
         console.log(obj)
-
         switch (obj.action) {
             case "insertUser":
                 $.post(

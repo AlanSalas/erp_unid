@@ -20,6 +20,7 @@ if (isset($id_usr)) {
             <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
             <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
             <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.css">
+
             <link rel="stylesheet" href="<?php echo constant("URL") ?>/vendor/components/chosen/chosen.css">
             <link rel="stylesheet" href="<?php echo constant("URL") ?>/main.css" />
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
