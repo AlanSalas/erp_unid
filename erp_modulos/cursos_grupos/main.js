@@ -24,7 +24,7 @@ $(document).ready(function () {
         $("#id_grupo_many").val("").trigger("chosen:updated")
     })
 
-    $(".btnEdit").click(function () {
+    $("#tableCoursesGroups").on("click", ".btnEdit", function(){
         let id = $(this).attr("data")
         obj = {
             action: "getCourseEmployee",
@@ -54,7 +54,7 @@ $(document).ready(function () {
         $("#grupo_many").css("display", "none")
     })
 
-    $(".btnDelete").click(function () {
+    $("#tableCoursesGroups").on("click", ".btnDelete", function(){
         let id = $(this).attr("data")
         obj = {
             action: "deleteCourseEmployee",

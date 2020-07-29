@@ -24,7 +24,7 @@ $(document).ready(function () {
         $("#formProfiles")[0].reset()
     })
 
-    $(".btnEdit").click(function () {
+    $("#tableProfiles").on("click", ".btnEdit", function(){
         $("#formProfiles")[0].reset()
         let id = $(this).attr("data")
         let resultConsultar = []
@@ -92,7 +92,7 @@ $(document).ready(function () {
         $("#btnInsertProfile").text("Editar")
     })
 
-    $(".btnDelete").click(function () {
+    $("#tableProfiles").on("click", ".btnDelete", function(){
         let id = $(this).attr("data")
         obj = {
             action: "deleteProfile",

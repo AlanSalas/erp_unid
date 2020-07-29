@@ -66,7 +66,7 @@ if (isset($id_usr)) {
                                                 Nuevo módulo
                                             </button>
                                             <button class="btn btn-outline-success" data-toggle="modal" data-target="#modalModulosPrincipales" id="btn-newMP">
-                                                Insertar Módulo Principal
+                                                Nuevo módulo Principal
                                             </button>
                                             <button class="btn btn-outline-success" data-toggle="modal" data-target="#modalSubmodulos" id="btn-newS">
                                                 Asignar Submódulo

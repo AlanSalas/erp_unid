@@ -26,7 +26,7 @@ $(document).ready(function () {
     })
 
     //Accion de boton editar
-    $(".btn-edit").click(function () {
+    $("#tablemodulos").on("click", ".btn-edit", function(){
         let id = $(this).attr("data")
         obj = {
             accion: "getModulo",
@@ -52,7 +52,7 @@ $(document).ready(function () {
     })
 
     //Accion de boton Eliminar
-    $(".btn-delete").click(function () {
+    $("#tablemodulos").on("click", ".btn-delete", function(){
         let id_modulo = $(this).attr("data")
         obj = {
             accion: "deleteModulo",

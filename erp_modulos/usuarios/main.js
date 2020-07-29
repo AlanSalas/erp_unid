@@ -55,7 +55,7 @@ $(document).ready(function () {
         $("#id_empleado").val("0").trigger("chosen:updated")
     })
 
-    $(".btnEdit").click(function () {
+    $("#tableUsers").on("click", ".btnEdit", function(){
         let id = $(this).attr("data")
         obj = {
             action: "getUser",
@@ -120,7 +120,7 @@ $(document).ready(function () {
         $("#btnInsertUser").text("Editar")
     })
 
-    $(".btnDelete").click(function () {
+    $("#tableUsers").on("click", ".btnDelete", function(){
         let id = $(this).attr("data")
         obj = {
             action: "deleteUser",

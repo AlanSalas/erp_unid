@@ -26,7 +26,7 @@ $(document).ready(function () {
   });
 
   //Accion de boton editar
-  $(".btnEditModuloP").click(function () {
+  $("#tablemodulosPrincipales").on("click", ".btnEditModuloP", function(){
     let id = $(this).attr("data");
     obj = {
       accion: "getModuloP",
@@ -51,7 +51,7 @@ $(document).ready(function () {
   });
 
   //Accion de boton Eliminar
-  $(".btnDeleteModuloP").click(function () {
+  $("#tablemodulosPrincipales").on("click", ".btnDeleteModuloP", function(){
     let id_modulo_principal = $(this).attr("data");
     obj = {
       accion: "deleteModuloP",

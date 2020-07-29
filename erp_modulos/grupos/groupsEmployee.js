@@ -57,7 +57,7 @@ $(document).ready(function () {
         $("#id_empleado").val("").trigger("chosen:updated")
     })
 
-    $(".btnEditGroupEmployee").click(function () {
+    $("#tableGroupsEmployees").on("click", ".btnEditGroupEmployee", function(){
         let id = $(this).attr("data")
         obj = {
             action: "getGroupEmployee",
@@ -109,7 +109,7 @@ $(document).ready(function () {
         $("#btnInsertGroupEmployee").text("Editar")
     })
 
-    $(".btnDeleteGroupEmployee").click(function () {
+    $("#tableGroupsEmployees").on("click", ".btnDeleteGroupEmployee", function(){
         let id = $(this).attr("data")
         obj = {
             action: "deleteGroupEmployee",

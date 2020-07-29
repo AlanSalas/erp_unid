@@ -95,7 +95,7 @@ $(document).ready(function () {
         $("#dias_curso").val("").trigger("chosen:updated")
     })
 
-    $(".btnEdit").click(function () {
+    $("#tableCourses").on("click", ".btnEdit", function(){
         let id = $(this).attr("data")
         obj = {
             action: "getCourse",
@@ -124,7 +124,7 @@ $(document).ready(function () {
         $("#btnInsertCourse").text("Editar")
     })
 
-    $(".btnDelete").click(function () {
+    $("#tableCourses").on("click", ".btnDelete", function(){
         let id = $(this).attr("data")
         obj = {
             action: "deleteCourse",

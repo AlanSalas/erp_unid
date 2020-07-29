@@ -19,7 +19,7 @@ $(document).ready(function () {
         return string.charAt(0).toUpperCase() + string.slice(1)
     }
 
-    $(".btnEdit").click(function () {
+    $("#tableGroups").on("click", ".btnEdit", function(){
         let id = $(this).attr("data")
         obj = {
             action: "getGroup",
@@ -41,7 +41,7 @@ $(document).ready(function () {
         $("#btnInsertGroup").text("Editar")
     })
 
-    $(".btnDelete").click(function () {
+    $("#tableGroups").on("click", ".btnDelete", function(){
         let id = $(this).attr("data")
         obj = {
             action: "deleteGroup",

@@ -29,8 +29,16 @@ $(document).ready(function () {
   });
 
   //Pendiente
-  $(".btnEditSubmodulo").click(function () {
-    let id = $(this).attr("data");
+
+  // const btnEdit = document.querySelector(".btnEditSubmodulo");
+  // const tableSubmodulos = document.getElementById("tablesubmodulos");
+
+  // console.log(tableSubmodulos);
+
+  $("#tablesubmodulos").on("click", ".btnEditSubmodulo", function(){
+    console.log("click");
+    let id = $(this).attr('data');
+    console.log(id);
     obj = {
       accion: "getSubmodulo",
       id: id
@@ -60,10 +68,10 @@ $(document).ready(function () {
     $("#exampleModalLabelS").text("Editar Submódulo");
     $("#btn-formS").text("Editar");
     $("#id_submodulo").val("").trigger("chosen:updated");
-  });
+  })
 
   //Ya quedo
-  $(".btnDeleteSubmodulo").click(function () {
+  $("#tablesubmodulos").on("click", ".btnDeleteSubmodulo", function(){
     let id = $(this).attr("data");
     obj = {
       accion: "deleteSubmodulo",
@@ -99,7 +107,7 @@ $(document).ready(function () {
         );
       }
     });
-  });
+  })
 
   //Insert y Update
   $("#btn-formS").click(function () {
