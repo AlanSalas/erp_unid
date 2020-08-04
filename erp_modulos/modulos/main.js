@@ -39,6 +39,7 @@ $(document).ready(function () {
                 // console.log(respuesta.id);
                 $(".nombre_modulo").val(respuesta.nombre_modulo)
                 $("#icono_modulo").val(respuesta.icono_modulo)
+                $(".ruta_modulo").val(respuesta.ruta_modulo)
                 obj = {
                     accion: "updateModulo",
                     modulo: id,
