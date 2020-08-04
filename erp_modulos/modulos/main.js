@@ -101,6 +101,9 @@ $(document).ready(function () {
             .map(function (i, e) {
                 obj[e.name] = $(this).val()
             })
+        
+        console.log(obj);
+
         switch (obj.accion) {
             case "insertModulo":
                 $.post(
@@ -109,12 +112,12 @@ $(document).ready(function () {
                     function (respuesta) {
                         if (respuesta.status == 0) {
                             swal("¡ERROR!", "Campos vacios", "error")
-                            // console.log('eeeeeeeeeeeee');
                         } else if (respuesta.status == 1) {
-                            // console.log('nuevo');
                             swal("Éxito", "Módulo añadido correctamente", "success").then(() => {
                                 location.reload()
                             })
+                        } else if (respuesta.status == 2){
+                            swal("¡ERROR!", "Favor de ingresar una ruta valida", "error")
                         } else {
                             swal({
                                 title: "Oops...",

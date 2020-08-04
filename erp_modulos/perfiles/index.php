@@ -118,9 +118,13 @@ if (isset($id_usr)) {
                                                                 $insertarPerfiles = explode(' ', $profile['insertar']);
                                                                 foreach ($insertarPerfiles as $perfil) {
                                                                     $insertarNomModulo = $db->select('modulos', 'nombre_modulo', ['id_modulo' => $perfil]);
-                                                                    foreach ($insertarNomModulo as $nombreMod) {
-                                                                        echo $nombreMod;
-                                                                        echo "<br>";
+                                                                    if ($insertarNomModulo) {
+                                                                        foreach ($insertarNomModulo as $nombreMod) {
+                                                                            echo $nombreMod;
+                                                                            echo "<br>";
+                                                                        }   
+                                                                    } else {
+                                                                        echo "Sin módulos";
                                                                     }
                                                                 }
                                                                 ?>
@@ -130,9 +134,13 @@ if (isset($id_usr)) {
                                                                 $editarPerfiles = explode(' ', $profile['editar']);
                                                                 foreach ($editarPerfiles as $perfil) {
                                                                     $editarNomModulo = $db->select('modulos', 'nombre_modulo', ['id_modulo' => $perfil]);
-                                                                    foreach ($editarNomModulo as $nombreMod) {
-                                                                        echo $nombreMod;
-                                                                        echo "<br>";
+                                                                    if ($editarNomModulo) {
+                                                                        foreach ($editarNomModulo as $nombreMod) {
+                                                                            echo $nombreMod;
+                                                                            echo "<br>";
+                                                                        }   
+                                                                    } else {
+                                                                        echo "Sin módulos";
                                                                     }
                                                                 }
                                                                 ?>
@@ -142,9 +150,13 @@ if (isset($id_usr)) {
                                                                 $deletePerfiles = explode(' ', $profile['eliminar']);
                                                                 foreach ($deletePerfiles as $perfil) {
                                                                     $deleteNomModulo = $db->select('modulos', 'nombre_modulo', ['id_modulo' => $perfil]);
-                                                                    foreach ($deleteNomModulo as $nombreMod) {
-                                                                        echo $nombreMod;
-                                                                        echo "<br>";
+                                                                    if ($deleteNomModulo) {
+                                                                        foreach ($deleteNomModulo as $nombreMod) {
+                                                                            echo $nombreMod;
+                                                                            echo "<br>";
+                                                                        }   
+                                                                    } else {
+                                                                        echo "Sin módulos";
                                                                     }
                                                                 }
                                                                 ?>

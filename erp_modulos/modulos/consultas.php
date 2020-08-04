@@ -7,7 +7,7 @@ require_once ROOT_PATH . "/libs/database.php";
 if ($_POST) {
 
     switch ($_POST["accion"]) {
-            //Functions Modulos
+        //Functions Modulos
         case "getModulo":
             getModulo($_POST["modulo"]);
             break;
@@ -24,7 +24,7 @@ if ($_POST) {
             deleteModulo($_POST["modulo"]);
             break;
 
-            //Functions ModulosPrincipales
+        //Functions ModulosPrincipales
         case "getModuloP":
             getModuloP($_POST["id_modulo_principal"]);
             break;
@@ -41,7 +41,7 @@ if ($_POST) {
             deleteModuloP($_POST["id_modulo_principal"]);
             break;
 
-            //Functions Submodulos
+        //Functions Submodulos
         case "getSubmodulo":
             getSubmodulo($_POST["id"]);
             break;
@@ -68,6 +68,7 @@ function getModulo($id_modulo)
 
     $respuesta["nombre_modulo"] = $modulos["nombre_modulo"];
     $respuesta["icono_modulo"] = $modulos["icono_modulo"];
+    $respuesta["ruta_modulo"] = $modulos["ruta_modulo"];
     echo json_encode($respuesta);
 }
 
@@ -76,16 +77,22 @@ function insertModulo()
     global $db;
     $respuesta = [];
     $nombre_modulo = strtolower($_POST["nombre_modulo"]);
+    $ruta_modulo = $_POST["ruta_modulo"];
     $icono_modulo = $_POST["icono_modulo"];
 
-    if (empty(trim($nombre_modulo)) || $icono_modulo == "0") {
+    if (empty(trim($nombre_modulo)) || empty(trim($ruta_modulo)) || $icono_modulo == "0") {
         $respuesta["status"] = 0;
-    } else if (!empty($nombre_modulo) || $icono_modulo != "0") {
-        $db->insert("modulos", [
-            "nombre_modulo" => $nombre_modulo,
-            "icono_modulo" => $icono_modulo
-        ]);
-        $respuesta["status"] = 1;
+    } else if (!empty($nombre_modulo) || !empty($ruta_modulo) || $icono_modulo != "0") {
+        if (preg_match("/^\/(([A-z0-9\-\%]+\/)*[A-z0-9\-\%]+\/.+$)?/", $ruta_modulo)) {
+            $db->insert("modulos", [
+                "nombre_modulo" => $nombre_modulo,
+                "icono_modulo" => $icono_modulo,
+                "ruta_modulo" => $ruta_modulo,
+            ]);
+            $respuesta["status"] = 1;
+        } else {
+            $respuesta["status"] = 2;
+        }
     }
 
     echo json_encode($respuesta);
@@ -95,19 +102,24 @@ function updateModulo($id_modulo)
 {
     global $db;
     $nombre_modulo = strtolower($_POST["nombre_modulo"]);
+    $ruta_modulo = $_POST["ruta_modulo"];
     $icono_modulo = $_POST["icono_modulo"];
 
     if (empty(trim($nombre_modulo)) || $icono_modulo == "0") {
         $respuesta["status"] = 0;
-    } else if (!empty($nombre_modulo) || $icono_modulo != "0") {
-        $db->update("modulos", [
-            "nombre_modulo" => $nombre_modulo,
-            "icono_modulo" => $icono_modulo
-        ], [
-            "id_modulo" => $id_modulo
-        ]);
-
-        $respuesta["status"] = 1;
+    } else if (!empty($nombre_modulo) || !empty($ruta_modulo) || $icono_modulo != "0") {
+        if (preg_match("/^\/(([A-z0-9\-\%]+\/)*[A-z0-9\-\%]+\/.+$)?/", $ruta_modulo)) {
+            $db->update("modulos", [
+                "nombre_modulo" => $nombre_modulo,
+                "icono_modulo" => $icono_modulo,
+                "ruta_modulo" => $ruta_modulo,
+            ], [
+                "id_modulo" => $id_modulo,
+            ]);
+            $respuesta["status"] = 1;
+        } else {
+            $respuesta["status"] = 2;
+        }
     }
 
     echo json_encode($respuesta);
@@ -147,7 +159,7 @@ function insertModuloP()
         $duplicateModuloP = validateModuloP($moduloP);
         if (!$duplicateModuloP) {
             $db->insert('modulos_principales', [
-                'nombre_modulo_principal' => $moduloP
+                'nombre_modulo_principal' => $moduloP,
             ]);
             $respuesta["status"] = 1;
         } else {
@@ -181,7 +193,7 @@ function updateModuloP($id_modulo_principal)
         $duplicateModuloP = validateModuloP($nombreMP);
         if (!$duplicateModuloP) {
             $db->update('modulos_principales', [
-                'nombre_modulo_principal' => $nombreMP
+                'nombre_modulo_principal' => $nombreMP,
             ], ['id_modulo_principal' => $id_modulo_principal]);
             $respuesta["status"] = 1;
         } else {
@@ -201,7 +213,6 @@ function deleteModuloP($id_modulo_principal)
     echo json_encode($respuesta);
 }
 
-
 //Funtions Submodulos
 function validateSubmodulo($id_submodulo)
 {
@@ -219,10 +230,10 @@ function insertSubmodulo()
     global $db;
     $duplicate = false;
     $respuesta = [];
-    $id_moduloP= $_POST["id_moduloP"];
+    $id_moduloP = $_POST["id_moduloP"];
     $id_submodulo = $_POST["id_submodulo"];
 
-    if ( empty(trim($id_moduloP)) || $id_submodulo == "0") {
+    if (empty(trim($id_moduloP)) || $id_submodulo == "0") {
         $respuesta["status"] = 0;
     } else {
         if (sizeof($id_submodulo) == 1) {
@@ -230,7 +241,7 @@ function insertSubmodulo()
             if (!$duplicate) {
                 $db->insert("submodulos", [
                     "id_modulo_principal" => $id_moduloP,
-                    "id_submodulo" => $id_submodulo[0]
+                    "id_submodulo" => $id_submodulo[0],
                 ]);
                 $respuesta["status"] = 1;
             } else {
@@ -240,10 +251,10 @@ function insertSubmodulo()
             foreach ($id_submodulo as $id) {
                 $duplicate = validateSubmodulo($id);
                 if (!$duplicate) {
-                   $db->insert("submodulos", [
-                    "id_modulo_principal" => $id_moduloP,
-                    "id_submodulo" => $id
-                ]);
+                    $db->insert("submodulos", [
+                        "id_modulo_principal" => $id_moduloP,
+                        "id_submodulo" => $id,
+                    ]);
                     $respuesta["status"] = 1;
                 } else {
                     $respuesta["status"] = 2;
@@ -265,11 +276,11 @@ function updateSubmodulo($id)
 {
     global $db;
     $respuesta = [];
-    $id_moduloP= $_POST["id_moduloP"];
+    $id_moduloP = $_POST["id_moduloP"];
     $id_submodulo = $_POST["id_submoduloIn"];
     $duplicateSubmodulo = false;
 
-    if ($id_moduloP == '0' || $id_submodulo == '0' ) {
+    if ($id_moduloP == '0' || $id_submodulo == '0') {
         $respuesta["status"] = 0;
     } else {
         $duplicateSubmodulo = validateSubmodulo($id_submodulo);
@@ -278,7 +289,7 @@ function updateSubmodulo($id)
                 "submodulos",
                 [
                     "id_modulo_principal" => $id_moduloP,
-                    "id_submodulo" => $id_submodulo
+                    "id_submodulo" => $id_submodulo,
                 ],
                 ["id" => $id]
             );

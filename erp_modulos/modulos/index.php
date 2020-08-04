@@ -95,6 +95,7 @@ if (isset($id_usr)) {
                                                             <tr>
                                                                 <th>#</th>
                                                                 <th>Nombre</th>
+                                                                <th>Ruta</th>
                                                                 <th>Icono</th>
                                                                 <?php
                                                                 //Si el id del modulo se encuentra en el array de permisos editar o eliminar muestra el th
@@ -115,6 +116,7 @@ if (isset($id_usr)) {
                                                                 <tr>
                                                                     <th scope="row"><?php echo $num; ?></th>
                                                                     <td><?php echo utf8_encode($modulo['nombre_modulo']); ?></td>
+                                                                    <td><?php echo utf8_encode($modulo['ruta_modulo']); ?></td>
                                                                     <td><i class=" <?php echo $modulo['icono_modulo']; ?>"></i></td>
                                                                     <?php
                                                                     //Si el id del modulo se encuentra en el array de permisos editar o eliminar muestra el td
@@ -343,6 +345,12 @@ if (isset($id_usr)) {
                                 <div class="col-sm-10">
                                     <label for="validationCustom01">Nombre de Módulo</label>
                                     <input type="text" class="form-control nombre_modulo" name="nombre_modulo" placeholder="ej: Ventas">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-sm-10">
+                                    <label for="ruta_modulo">Ruta del Módulo</label>
+                                    <input type="text" class="form-control ruta_modulo" name="ruta_modulo" placeholder="ej: /erp_modulos/modulo_ejemplo/">
                                 </div>
                             </div>
                             <div class="form-row">

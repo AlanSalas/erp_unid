@@ -62,7 +62,7 @@ $modulosConsultar = array_intersect($modulos, $_SESSION["consultar"]);
                     <li class="app-sidebar__heading" id="<?php echo "head-" . $i ?>"><?php echo $nombrePrincipal["principal"] ?></li>
                     <?php
                     foreach ($modulosConsultar as $modulo) {
-                        $nombre = $db->query("SELECT modulos.nombre_modulo as modulo, modulos.icono_modulo AS icono
+                        $nombre = $db->query("SELECT modulos.nombre_modulo as modulo, modulos.icono_modulo AS icono, modulos.ruta_modulo as ruta
                         FROM modulos
                         INNER JOIN submodulos ON submodulos.id_submodulo = modulos.id_modulo
                         INNER JOIN modulos_principales ON submodulos.id_modulo_principal = modulos_principales.id_modulo_principal
@@ -70,9 +70,9 @@ $modulosConsultar = array_intersect($modulos, $_SESSION["consultar"]);
                         foreach ($nombre as $modulo) {
                     ?>
                             <li class="links">
-                                <a href="<?php echo constant('URL') ?>/erp_modulos/<?php echo $modulo['modulo']; ?>/">
+                                <a href="<?php echo constant('URL') ?><?php echo $modulo['ruta']; ?>">
                                     <i class="metismenu-icon <?php echo $modulo['icono']; ?>"></i>
-                                    <?php echo $modulo['modulo']; ?>
+                                    <?php echo ucfirst($modulo['modulo']); ?>
                                 </a>
                             </li>
 
