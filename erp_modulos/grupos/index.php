@@ -65,7 +65,7 @@ if (isset($id_usr)) {
                                                 Añadir nuevo grupo
                                             </button>
                                             <button class="btn btn-outline-success" data-toggle="modal" data-target="#modalGroupEmployee" id="newGroupEmployee">
-                                                Asignar grupo a empleado(s)
+                                                Asignar curso(s) a empleado(s)
                                             </button>
                                         <?php
                                         endif;

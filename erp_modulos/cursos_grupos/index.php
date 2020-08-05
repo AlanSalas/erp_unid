@@ -6,7 +6,7 @@ error_reporting(0);
 $id_usr = $_SESSION["id"];
 if (isset($id_usr)) {
     //Traer id del modulo actual
-    $idModuloCursosGrupos = $db->select("modulos", "id_modulo", ["nombre_modulo" => "cursos_grupos"]);
+    $idModuloCursosGrupos = $db->select("modulos", "id_modulo", ["nombre_modulo" => "cursos en grupos"]);
     //Si no puede consultar este modulo mostrar pagina de error
     if (!in_array($idModuloCursosGrupos[0], $_SESSION["consultar"])) {
         header("Location:" . URL . "/403.html");
@@ -46,13 +46,13 @@ if (isset($id_usr)) {
                                         <!-- Img title -->
                                         <div class="page-title-icon">
                                             <?php
-                                            $iconoCursosGrupo = $db->get("modulos", "icono_modulo", ["nombre_modulo" => "cursos_grupos"]);
+                                            $iconoCursosGrupo = $db->get("modulos", "icono_modulo", ["nombre_modulo" => "cursos en grupos"]);
                                             ?>
                                             <i class="<?php echo $iconoCursosGrupo; ?>"></i>
                                         </div>
                                         <!-- Title & subtitle -->
                                         <div>
-                                            Consultar cursos de grupos
+                                            Cursos en grupos
                                         </div>
                                     </div>
                                     <div class="page-title-actions">

@@ -62,36 +62,39 @@ if (isset($id_empleado)) {
 
             <div class="boxContent">
               <div class="texto">
+                <h2 class="cursoo">Curso: <span class="tituloo"><?php echo $consulta['curso']; ?> </span></h2>
+                <div class="blanco">
                 <h2>Grupo:</h2>
                 <p><?php echo $consulta['grupo']; ?></p>
-                <h2>Curso:</h2>
-                <p><?php echo $consulta['curso']; ?></p>
                 <h2>Horario:</h2>
                 <p><?php echo $consulta['horario']; ?></p>
                 <h2>Fecha Inicio:</h2>
                 <p><?php echo $consulta['inicio']; ?></p>
                 <h2>Fecha Fin:</h2>
                 <p><?php echo $consulta['final']; ?></p>
-                <h2>Status:</h2>
-                <?php if ($consulta['statu'] == 'Nuevo') {
-                ?>
-                  <span class="nuevo">Nuevo</span>
-                <?php } elseif ($consulta['statu'] == 'En proceso') {
-                ?>
-                  <span class="enproceso">En Proceso</span>
-                <?php } elseif ($consulta['statu'] == 'Pendiente') {
-                ?>
-                  <span class="pendiente">Pendiente</span>
-                <?php } elseif ($consulta['statu'] == 'Terminado') {
-                ?>
-                  <form action="certificado.php" method="POST">
-                    <span class="terminado">Terminado</span>
-                    <input type="submit" value="Diploma" class="btnDiploma" id="btnDiploma"></input>
-                    <input type="hidden" name="empleado" value="<?php echo $empleadoFullName; ?>">
-                    <input type="hidden" name="curso" value="<?php echo $consulta['curso']; ?>">
-                    <input type="hidden" name="grupo" value="<?php echo $consulta['grupo']; ?>">
-                  </form>
-                <?php } ?>
+                </div>
+                <div class="statuss">
+                  <h2 class="statusss">Status:</h2>
+                  <?php if ($consulta['statu'] == 'Nuevo') {
+                  ?>
+                    <span class="nuevo">Nuevo</span>
+                  <?php } elseif ($consulta['statu'] == 'En proceso') {
+                  ?>
+                    <span class="enproceso">En Proceso</span>
+                  <?php } elseif ($consulta['statu'] == 'Pendiente') {
+                  ?>
+                    <span class="pendiente">Pendiente</span>
+                  <?php } elseif ($consulta['statu'] == 'Terminado') {
+                  ?>
+                    <form action="certificado.php" method="POST">
+                      <span class="terminado">Terminado</span>
+                      <input type="submit" value="Diploma" class="btnDiploma" id="btnDiploma"></input>
+                      <input type="hidden" name="empleado" value="<?php echo $empleadoFullName; ?>">
+                      <input type="hidden" name="curso" value="<?php echo $consulta['curso']; ?>">
+                      <input type="hidden" name="grupo" value="<?php echo $consulta['grupo']; ?>">
+                    </form>
+                  <?php } ?>
+                </div>
               </div>
             </div>
           <?php } ?>
@@ -99,11 +102,12 @@ if (isset($id_empleado)) {
       <?php } ?>
 
       <footer class="footer">
-        <div class="textoo">
-          <p>mucho texto</p>
-          <img src="images/yoda.png" alt="yoda" />
+        <div class="abajo">
+          <hr style="border-color: rgba(255,255,255,.20); margin-bottom: 15px;">
+          <small class="texto-footer">ERP UNID - Todos los derechos reservados 2020</small>
         </div>
       </footer>
+
     </div>
   </body>
 
