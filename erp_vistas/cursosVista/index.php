@@ -26,13 +26,18 @@ if (isset($id_empleado)) {
             $empleado = $db->get("empleados_rh", ["name", "lastname"], ["id" => $id_empleado]);
             $empleadoFullName = $empleado['name'] . ' ' . $empleado['lastname'];
             ?>
-            <h2>Bienvenido <?php echo $empleadoFullName; ?> a Vista Cursos</h2>
-            <p>
-              Aqui podras ver todos tus cursos en los cuales estas registrado
-            </p>
+            <h2>Bienvenido <?php echo $empleadoFullName; ?> a Cursos Asignados</h2>
+            <div class="sesenta">
+              <p class="tets">
+                <span>
+                  Aqui podras ver todos tus cursos en los cuales estas registrado
+                </span>
+              </p>
+            </div>
           </div>
         </div>
-        <span>=</span>
+        <span class="equal">=</span>
+        <!-- TODO:Cambiar al boton si quieres -->
       </section>
 
       <?php
@@ -50,54 +55,56 @@ if (isset($id_empleado)) {
       if ($consultaEmpleadoCursos[0] == '') {
       ?>
         <section class="cursos">
-          <h3 style="color: #fff; font-style: italic; font-weight: lighter;">Estas registrado en 0 cursos</h3>
+          <h3 style="color: #274356; font-style: italic; font-weight: lighter;">Estas registrado en 0 cursos</h3>
         </section>
       <?php
       } else {
       ?>
-        <section class="cursos">
-          <?php
-          foreach ($consultaEmpleadoCursos as $consulta) {
-          ?>
+        <section>
+          <h2 class="titulo-section">Cursos Asignados</h2>
+          <div class="cursos">
+            <?php
+            foreach ($consultaEmpleadoCursos as $consulta) {
+            ?>
 
-            <div class="boxContent">
-              <div class="texto">
-                <h2 class="cursoo">Curso: <span class="tituloo"><?php echo $consulta['curso']; ?> </span></h2>
-                <div class="blanco">
-                <h2>Grupo:</h2>
-                <p><?php echo $consulta['grupo']; ?></p>
-                <h2>Horario:</h2>
-                <p><?php echo $consulta['horario']; ?></p>
-                <h2>Fecha Inicio:</h2>
-                <p><?php echo $consulta['inicio']; ?></p>
-                <h2>Fecha Fin:</h2>
-                <p><?php echo $consulta['final']; ?></p>
-                </div>
-                <div class="statuss">
-                  <h2 class="statusss">Status:</h2>
-                  <?php if ($consulta['statu'] == 'Nuevo') {
-                  ?>
-                    <span class="nuevo">Nuevo</span>
-                  <?php } elseif ($consulta['statu'] == 'En proceso') {
-                  ?>
-                    <span class="enproceso">En Proceso</span>
-                  <?php } elseif ($consulta['statu'] == 'Pendiente') {
-                  ?>
-                    <span class="pendiente">Pendiente</span>
-                  <?php } elseif ($consulta['statu'] == 'Terminado') {
-                  ?>
-                    <form action="certificado.php" method="POST">
-                      <span class="terminado">Terminado</span>
-                      <input type="submit" value="Diploma" class="btnDiploma" id="btnDiploma"></input>
-                      <input type="hidden" name="empleado" value="<?php echo $empleadoFullName; ?>">
-                      <input type="hidden" name="curso" value="<?php echo $consulta['curso']; ?>">
-                      <input type="hidden" name="grupo" value="<?php echo $consulta['grupo']; ?>">
-                    </form>
-                  <?php } ?>
+              <div class="boxContent">
+                <div class="texto">
+                  <h2 class="cursoo"><span class="tituloo"><?php echo ucfirst($consulta['curso']); ?> </span></h2>
+                  <div class="blanco">
+                    <p class="grupo"><?php echo strtoupper($consulta['grupo']); ?></p>
+                    <h2>Horario:</h2>
+                    <p><?php echo $consulta['horario']; ?></p>
+                    <h2>Fecha Inicio:</h2>
+                    <p><?php echo $consulta['inicio']; ?></p>
+                    <h2>Fecha Fin:</h2>
+                    <p><?php echo $consulta['final']; ?></p>
+                  </div>
+                  <div class="statuss">
+                    <h4 class="status-t">Status</h4>
+                    <?php if ($consulta['statu'] == 'Nuevo') {
+                    ?>
+                      <span class="nuevo">Nuevo</span>
+                    <?php } elseif ($consulta['statu'] == 'En proceso') {
+                    ?>
+                      <span class="enproceso">En Proceso</span>
+                    <?php } elseif ($consulta['statu'] == 'Pendiente') {
+                    ?>
+                      <span class="pendiente">Pendiente</span>
+                    <?php } elseif ($consulta['statu'] == 'Terminado') {
+                    ?>
+                      <form action="certificado.php" method="POST">
+                        <span class="terminado">Terminado</span>
+                        <input type="submit" value="Diploma" class="btnDiploma" id="btnDiploma"></input>
+                        <input type="hidden" name="empleado" value="<?php echo $empleadoFullName; ?>">
+                        <input type="hidden" name="curso" value="<?php echo $consulta['curso']; ?>">
+                        <input type="hidden" name="grupo" value="<?php echo $consulta['grupo']; ?>">
+                      </form>
+                    <?php } ?>
+                  </div>
                 </div>
               </div>
-            </div>
-          <?php } ?>
+            <?php } ?>
+          </div>
         </section>
       <?php } ?>
 

@@ -7,11 +7,13 @@
   --secondary-color: rgb(0, 37, 107);
   --third-color: rgb(1, 60, 170);
   --blue: #274356;
+  --btn: #17a2b8;
   --opacity: 0.5;
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; */
+  font-family: "Montserrat", sans-serif;
   background: var(--primary-color);
 }
 
@@ -20,46 +22,75 @@ body {
 }
 
 .banner {
-  background: url("images/banner.jpg"), rgba(14, 13, 13, 0.25);
-  background-size: cover;
-  background-blend-mode: multiply;
   width: 100%;
-  height: 75vh;
+  height: 80vh;
+  background: url("../assets/images/desk.jpg") no-repeat center center;
+  /* background-image: url("../assets/images/desk.jpg"); */
+  background-color: rgba(0, 0, 0, 0.05);
+  background-blend-mode: multiply;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  overflow: hidden;
   display: flex;
   flex-flow: column nowrap;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 }
 
 .text {
-  width: 80%;
-  box-shadow:  0px 0px 10px rgba(255, 255, 255, 0.6);
+  width: 60%;
   padding: 2.5em;
-  text-align: center;
-  background: rgba(0,0,0,.33);
+  /* background: red; */
+  text-align: left;
 }
 
 .text h2 {
-  color: var(--primary-color);
-  font-size: 3em;
+  color: var(--blue);
+  font-size: 2rem;
   font-weight: lighter;
-  margin-bottom: 15px;
-  border-bottom: 1px solid var(--primary-color);
+  margin-bottom: 1.5rem;
+  width: 100%;
+  /* background: red; */
+  animation: slide-right 1.2s forwards;
+  transform: translateX(-100%);
 }
 
-.text p {
+.text .sesenta {
+  width: 70%;
+  animation: 2s slide-right 1s forwards;
+  transform: translateX(-110%);
+}
+
+.text .sesenta .tets span {
+  display: block;
   color: var(--primary-color);
-  font-size: 1.15em;
-  font-style: italic;
+  background-color: var(--blue);
+  font-size: 0.9375rem;
+  font-weight: 300;
+  width: 100%;
   line-height: 25px;
+  padding: 2.5px 5px;
+  margin-top: 1rem;
 }
 
-.banner-wrapper span {
+/* Animaciones */
+
+@keyframes slide-right {
+  to {
+    transform: translateX(0);
+  }
+}
+/* Termina Animaciones */
+
+.banner-wrapper .equal {
   position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 3rem;
+  font-size: 2.5rem;
+  font-weight: lighter;
   color: var(--primary-color);
   padding: 0;
   width: 80px;
@@ -69,45 +100,60 @@ body {
   left: 50%;
   transform: translateX(-50%);
   border-radius: 10%;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
 }
 
-/* Seccion cursos*/
+/* Seccion cursos - Tarjetas */
+.titulo-section {
+  position: relative;
+  color: var(--blue);
+  font-weight: 500;
+  font-size: 1rem;
+  text-align: center;
+  margin-top: 100px;
+  /* border-bottom: 1px solid rgba(0,0,0,0.03);
+  padding-bottom: 20px; */
+}
+
+.titulo-section:before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -10px;
+  height: 1px;
+  width: 60%; /* or 100px */
+  transform: translateX(-50%);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
 .cursos {
-  /* width: 90%; */
-  margin: 70px auto;
-  /* border: 2px solid rgb(172, 172, 172); */
-  padding: 35px;
+  margin: 35px auto;
+  padding: 10px;
   display: flex;
   flex-flow: row wrap;
   align-items: flex-start;
   justify-content: center;
-  /* box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.25); */
-  /* background: red; */
-  margin-bottom: 70px;
+  /* margin-bottom: 70px; */
 }
 
 .boxContent {
   flex: 0 1 35%;
   padding: 15px;
   margin: 10px 10px;
-  /* border: 1px solid rgb(172, 172, 172); */
   background: #fff;
 }
 
 .boxContent .texto {
   display: flex;
   flex-flow: column wrap;
-  /* align-items: center;
-  justify-content: center; 
-   text-align: left; 
-   padding: .75rem 1.25rem; */
 }
 
 .boxContent .texto h2 {
-  color: black;
+  color: var(--blue);
   font-size: 1em;
-  text-transform: uppercase;
   font-weight: bold;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
 .boxContent .texto p {
@@ -115,7 +161,18 @@ body {
   font-weight: normal;
   margin-bottom: 5px;
   line-height: 20px;
-  font-style: italic;
+  margin-bottom: 14px;
+  margin-top: 5px;
+  font-weight: 400;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+.boxContent .texto .grupo {
+  color: var(--blue);
+  font-weight: 500;
+  font-size: 1.25rem;
+  font-family: "Montserrat", sans-serif;
 }
 
 .boxContent .texto .nuevo {
@@ -123,6 +180,7 @@ body {
   background: rgba(0, 128, 0, 0.739);
   padding: 5px 10px;
   font-weight: bold;
+  margin-bottom: 0.8rem;
 }
 
 .boxContent .texto .enproceso {
@@ -130,6 +188,7 @@ body {
   background: rgba(230, 97, 9, 0.739);
   padding: 5px 10px;
   font-weight: bold;
+  margin-bottom: 0.8rem;
 }
 
 .boxContent .texto .pendiente {
@@ -137,6 +196,7 @@ body {
   background: rgba(255, 0, 0, 0.692);
   padding: 5px 10px;
   font-weight: bold;
+  margin-bottom: 0.8rem;
 }
 
 .boxContent .texto .terminado {
@@ -146,44 +206,51 @@ body {
   font-weight: bold;
 }
 
-.boxContent .texto .btnDiploma{
-  padding: 5px;
-  /* border: none; */
-  color: black;
-  border: 1px solid var(--blue);
+.boxContent .texto .btnDiploma {
   font-size: 17px;
-  font-weight: bold;
-  background: yellow;
-  opacity: .6;
-  transition: 500ms ease-in-out;
+  color: var(--btn);
+  border: 1px solid var(--btn);
+  border-radius: 5%;
+  transition: 200ms ease-in-out;
+  font-weight: 400;
+  padding: 5px;
+  /* margin-bottom: .8rem; */
 }
-.boxContent .texto .btnDiploma:hover{
+.boxContent .texto .btnDiploma:hover {
   cursor: pointer;
-  opacity: 1;
+  background: var(--btn);
+  color: white;
 }
 
-.tituloo{
+.tituloo {
   color: var(--blue);
-  /* font-size: 2rem; */
+  font-size: 1.25rem;
+  font-weight: 500;
 }
 
-.blanco{
-  padding: .75rem 24px;
-  border-left: 1px solid rgb(172, 172, 172);
-  border-right: 1px solid rgb(172, 172, 172);
+.blanco {
+  padding: 0.75rem 24px;
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.cursoo, .statuss{
-  padding: .75rem 1.5rem;
-  background-color: rgba(0,0,0,.03);
+.cursoo,
+.statuss {
+  padding: 0.75rem 1.5rem;
+  background-color: rgba(0, 0, 0, 0.03);
   width: 100%;
-  border: 1px solid rgb(172, 172, 172);
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
-
-.statusss{
-  margin-bottom: .5rem;
+.statuss {
+  padding: 1rem 1.5rem;
 }
-
+.status-t {
+  margin-bottom: 0.5rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-weight: 500;
+  color: var(--blue);
+}
 
 /*Empieza footer*/
 .footer {
@@ -197,7 +264,7 @@ body {
   align-items: center;
 }
 
-.footer .abajo{
+.footer .abajo {
   position: absolute;
   bottom: 0;
   color: #fff;
@@ -207,24 +274,6 @@ body {
   padding-bottom: 15px;
 }
 
-.footer .abajo .texto-footer{
+.footer .abajo .texto-footer {
   margin: 10px 0;
 }
-
-/* .footer::before {
-  content: "FOOTER";
-  color: var(--third-color);
-  font-size: 50px;
-  position: absolute;
-  top: 0;
-  left: 5%;
-} */
-/* .footer::after {
-  content: "FOOTER";
-  color: var(--primary-color);
-  font-size: 50px;
-  position: absolute;
-  bottom: 0;
-  right: 5%;
-  opacity: 0.5;
-} */

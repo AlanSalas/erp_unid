@@ -1,0 +1,43 @@
+.galleria{
+    display: flex;
+    flex-wrap: wrap;
+
+    justify-content: space-around;
+    align-items: center;
+
+    margin: 25px 0;
+}
+
+.img_mini{
+    width: 170px;
+    height: auto;
+
+    border-radius: 7px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    display: inline-block;
+}
+
+.img_principal{
+    width: 300px;
+    height: auto;
+
+    border-radius: 7px;
+}
+
+.mini{
+    display: inline-block;
+}
+
+.descripcion{
+    width: 300px;
+    background: rgba(0, 0, 0, .1);
+    border-radius: 10px;
+    font-weight: 300;
+    transition: .3s ease-in;
+    text-align: center;
+}
+
+ h3, h6{
+    font-weight: 500;
+}
